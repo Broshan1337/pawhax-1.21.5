@@ -2,6 +2,10 @@ plugins {
     alias(libs.plugins.fabric.loom)
 }
 
+loom {
+    accessWidenerPath.set(file("src/main/resources/pawhax.accesswidener"))
+}
+
 base {
     archivesName = properties["archives_base_name"] as String
     version = libs.versions.mod.version.get()
