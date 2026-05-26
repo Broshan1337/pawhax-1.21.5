@@ -81,7 +81,7 @@ public class AntiAntiSpam extends Module {
         super.fromTag(tag);
         savedToggles.clear();
         for (String key : tag.getKeys()) {
-            if (key.startsWith("t:")) savedToggles.put(key.substring(2), tag.getBoolean(key));
+            if (key.startsWith("t:")) savedToggles.put(key.substring(2), tag.getBoolean(key).orElse(false));
         }
         return this;
     }

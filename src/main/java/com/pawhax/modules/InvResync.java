@@ -6,10 +6,10 @@ import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
 import net.minecraft.network.packet.s2c.play.InventoryS2CPacket;
 import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.screen.sync.ItemStackHash;
 
 import com.pawhax.PawHax;
 
@@ -55,7 +55,7 @@ public class InvResync extends Module {
 
     @EventHandler
     private void onReceivePacket(PacketEvent.Receive event) {
-        if (event.packet instanceof InventoryS2CPacket packet && packet.getSyncId() == 0) {
+        if (event.packet instanceof InventoryS2CPacket packet && packet.syncId() == 0) {
             lastFullSyncNanos = System.nanoTime();
             pendingResyncSentNanos = 0L;
         }
@@ -90,11 +90,11 @@ public class InvResync extends Module {
         mc.player.networkHandler.sendPacket(new ClickSlotC2SPacket(
                 0,
                 forcedRev,
-                0,
-                0,
+                (short) 0,
+                (byte) 0,
                 SlotActionType.PICKUP,
-                ItemStack.EMPTY,
-                new Int2ObjectOpenHashMap<>()
+                new Int2ObjectOpenHashMap<>(),
+                ItemStackHash.EMPTY
         ));
 
         pendingResyncSentNanos = now;

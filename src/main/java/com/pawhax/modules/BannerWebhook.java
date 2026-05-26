@@ -90,12 +90,12 @@ public class BannerWebhook extends Module {
 
     private String buildKey(BannerBlockEntity banner) {
         StringBuilder sb = new StringBuilder();
-        sb.append(banner.getColorForState().getName()).append("|");
+        sb.append(banner.getColorForState().name().toLowerCase()).append("|");
         BannerPatternsComponent patterns = banner.getPatterns();
         if (patterns != null) {
             for (BannerPatternsComponent.Layer layer : patterns.layers()) {
                 sb.append(layer.pattern().value().assetId())
-                  .append(":").append(layer.color().getName()).append(";");
+                  .append(":").append(layer.color().name().toLowerCase()).append(";");
             }
         }
         return sb.toString();
@@ -106,13 +106,13 @@ public class BannerWebhook extends Module {
         sb.append("🚩 **New Banner Pattern!**\n");
         sb.append("📍 **Coords:** `").append(pos.getX()).append(", ")
           .append(pos.getY()).append(", ").append(pos.getZ()).append("`\n");
-        sb.append("🎨 **Base:** ").append(formatName(banner.getColorForState().getName())).append("\n");
+        sb.append("🎨 **Base:** ").append(formatName(banner.getColorForState().name().toLowerCase())).append("\n");
         BannerPatternsComponent patterns = banner.getPatterns();
         if (patterns != null && !patterns.layers().isEmpty()) {
             int i = 1;
             for (BannerPatternsComponent.Layer layer : patterns.layers()) {
                 String patternName = formatName(layer.pattern().value().assetId().getPath());
-                String colorName = formatName(layer.color().getName());
+                String colorName = formatName(layer.color().name().toLowerCase());
                 sb.append("**Pattern ").append(i++).append(":** ")
                   .append(colorName).append(" ").append(patternName).append("\n");
             }

@@ -255,8 +255,6 @@ public class AntiAntiAFK extends Module {
             if (spin.get()) {
                 // HOW HARD IS IT TO MAKE IT SMOOTH TO SPING OMGFG
                 serverYaw = (serverYaw + spinSpeed.get()) % 360f;
-                mc.player.prevBodyYaw = serverYaw - spinSpeed.get();
-                mc.player.prevHeadYaw = serverYaw - spinSpeed.get();
                 mc.player.bodyYaw = serverYaw;
                 mc.player.headYaw = serverYaw;
                 Rotations.rotate(serverYaw, 0, -15);
@@ -364,7 +362,7 @@ public class AntiAntiAFK extends Module {
     private void doTotemEquip() {
         var handler = mc.player.playerScreenHandler;
         var inv = mc.player.getInventory();
-        if (inv.getMainHandStack().getItem() == Items.TOTEM_OF_UNDYING) return;
+        if (mc.player.getMainHandStack().getItem() == Items.TOTEM_OF_UNDYING) return;
 
         for (int i = 36; i <= 44; i++) {
             if (handler.getSlot(i).getStack().getItem() == Items.TOTEM_OF_UNDYING) {

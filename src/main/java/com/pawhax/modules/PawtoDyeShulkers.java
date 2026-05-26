@@ -159,17 +159,17 @@ public class PawtoDyeShulkers extends Module {
         int[] counts = new int[DYE_COLORS.length];
         for (int n = invStart; n < invEnd; n++) {
             ItemStack stack = cs.getSlot(n).getStack();
-            if (stack.getItem() instanceof DyeItem dye) counts[dye.getColor().getId()] += stack.getCount();
+            if (stack.getItem() instanceof DyeItem dye) counts[dye.getColor().ordinal()] += stack.getCount();
         }
         // Also check grid input slots in case dye was already moved there
         for (int n = 1; n < inputEnd; n++) {
             ItemStack stack = cs.getSlot(n).getStack();
-            if (stack.getItem() instanceof DyeItem dye) counts[dye.getColor().getId()] += stack.getCount();
+            if (stack.getItem() instanceof DyeItem dye) counts[dye.getColor().ordinal()] += stack.getCount();
         }
         DyeColor best = null;
         int bestCount = 0;
         for (DyeColor c : DYE_COLORS) {
-            if (counts[c.getId()] > bestCount) { bestCount = counts[c.getId()]; best = c; }
+            if (counts[c.ordinal()] > bestCount) { bestCount = counts[c.ordinal()]; best = c; }
         }
         return best != null ? best : dyeColor.get(); // fall back to manual setting if no dye found
     }

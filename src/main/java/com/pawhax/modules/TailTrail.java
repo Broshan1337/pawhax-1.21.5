@@ -136,7 +136,7 @@ public class TailTrail extends Module {
             double vx = (rng.nextDouble() - 0.5) * rnV;
             double vy = upV + (rng.nextDouble() - 0.5) * rnV * 0.5;
             double vz = (rng.nextDouble() - 0.5) * rnV;
-            mc.world.addParticle(simple, x + ox, y + oy, z + oz, vx, vy, vz);
+            mc.world.addParticle(x + ox, y + oy, z + oz, vx, vy, simple);
         }
     }
 }
